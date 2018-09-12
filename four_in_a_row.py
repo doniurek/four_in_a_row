@@ -1,10 +1,10 @@
 board = [
-    ['1A', '2B', '3C', '4D', '5E', '6F', '7G'],
-    ['1A', '2B', '3C', '4D', '5E', '6F', '7G'],
-    ['1A', '2B', '3C', '4D', '5E', '6F', '7G'],
-    ['1A', '2B', '3C', '4D', '5E', '6F', '7G'],
-    ['1A', '2B', '3C', '4D', '5E', '6F', '7G'],
-    ['1A', '2B', '3C', '4D', '5E', '6F', '7G'],
+    ['1', '2', '3', '4', '5', '6', '7'],
+    ['1', '2', '3', '4', '5', '6', '7'],
+    ['1', '2', '3', '4', '5', '6', '7'],
+    ['1', '2', '3', '4', '5', '6', '7'],
+    ['1', '2', '3', '4', '5', '6', '7'],
+    ['1', '2', '3', '4', '5', '6', '7'],
     ]
 
 def print_board(board):
@@ -12,8 +12,8 @@ def print_board(board):
     for line in range(len(board)):
         for field in range(len(board[line])):
             printable = printable + ' | ' + board[line][field]
-        printable = printable + ' | \n |____|____|____|____|____|____|____| \n |    |    |    |    |    |    |    | \n'
-    printable = '\n  __________________________________ \n |    |    |    |    |    |    |    | \n' + printable
+        printable = printable + ' | \n |___|___|___|___|___|___|___| \n |   |   |   |   |   |   |   | \n'
+    printable = '\n  ___________________________ \n |   |   |   |   |   |   |   | \n' + printable
     print(printable)
 
 print_board(board)
