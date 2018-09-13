@@ -17,6 +17,22 @@ def set_token(board, gamer, position):
 def check_move(board, position):
     return position in range(1,8) and type(board[0][position-1]) == int
 
+def win(board):
+    for i in range(6):
+        for j in range(4):
+            if board[i][j] == board[i][j+1] and board[i][j+1] == board[i][j+2] and board[i][j+2] == board[i][j+3]:
+                return True
+    for i in range(2):
+        for j in range(7):
+            if board[i][j] == board[i+1][j] and board[i+1][j] == board[i+2][j] and board[i+2][j] == board[i+3][j]:
+                return True
+    return False
+
+def which_gamer(gamer):
+    if gamer == "@":
+        return "gracz nr. 1"
+    return "gracz nr. 2"
+
 board = [
     [1, 2, 3, 4, 5, 6, 7],
     [1, 2, 3, 4, 5, 6, 7],
@@ -61,3 +77,9 @@ for round in range(1, 43):
     set_token(board, gamer, position)
 
     print_board(board)
+
+    if round > 6 and win(board):
+        print("Koniec gry. Wygrywa", which_gamer(gamer)+". Gratulacje!" )
+        exit()
+
+print("Koniec gry. Remis!")
