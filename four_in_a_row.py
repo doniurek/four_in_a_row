@@ -18,14 +18,30 @@ def check_move(board, position):
     return position in range(1,8) and type(board[0][position-1]) == int
 
 def win(board):
+    # horizontal
     for i in range(6):
         for j in range(4):
-            if board[i][j] == board[i][j+1] and board[i][j+1] == board[i][j+2] and board[i][j+2] == board[i][j+3]:
+            if type(board[i][j]) == str and board[i][j] == board[i][j+1] and board[i][j+1] == board[i][j+2] and board[i][j+2] == board[i][j+3]:
                 return True
-    for i in range(2):
+    # vertical
+    for i in range(3):
         for j in range(7):
-            if board[i][j] == board[i+1][j] and board[i+1][j] == board[i+2][j] and board[i+2][j] == board[i+3][j]:
+            if type(board[i][j]) == str and board[i][j] == board[i+1][j] and board[i+1][j] == board[i+2][j] and board[i+2][j] == board[i+3][j]:
                 return True
+
+    l = []
+    for i in range(6):
+        l += board[i]
+
+    # \
+    for i in range(18):
+        if l[i] == l[i+8] and l[i+8] == l[i+16] and l[i+16] == l[i+24]:
+            return True
+    # /
+    for i in range(24):
+        if l[i] == l[i+6] and l[i+6] == l[i+12] and l[i+12] == l[i+18]:
+            return True
+
     return False
 
 def which_gamer(gamer):
