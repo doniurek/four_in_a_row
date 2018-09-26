@@ -1,32 +1,39 @@
 def print_board(board):
     printable = ''
-    for line in range(len(board)):
-        for field in range(len(board[line])):
-            printable = printable + ' | ' + str(board[line][field])
-        printable = printable + ' | \n |___|___|___|___|___|___|___| \n |   |   |   |   |   |   |   | \n'
-    printable = '\n  ___________________________ \n |   |   |   |   |   |   |   | \n' + printable
+    for row in range(6):
+        for field in range(7):
+            printable = printable + ' | ' + str(board[row][field])
+        printable = printable + ' | \n |___|___|___|___|___|___|___|' \
+        + ' \n |   |   |   |   |   |   |   | \n'
+    printable = '\n  ___________________________ \n' \
+    + ' |   |   |   |   |   |   |   | \n' + printable
     print(printable)
 
 def set_token(board, gamer, position):
-    for i in reversed(range(6)):
-        if type(board[i][position-1]) == int:
-            board[i][position-1] = gamer
+    for row in reversed(range(6)):
+        if type(board[row][position-1]) == int:
+            board[row][position-1] = gamer
             break
-    return board
 
 def check_move(board, position):
     return position in range(1,8) and type(board[0][position-1]) == int
 
 def win(board):
     # horizontal
-    for i in range(6):
-        for j in range(4):
-            if type(board[i][j]) == str and board[i][j] == board[i][j+1] and board[i][j+1] == board[i][j+2] and board[i][j+2] == board[i][j+3]:
+    for row in range(6):
+        for column in range(4):
+            if type(board[row][column]) == str \
+            and board[row][column] == board[row][column+1] \
+            and board[row][column+1] == board[row][column+2] \
+            and board[row][column+2] == board[row][column+3]:
                 return True
     # vertical
-    for i in range(3):
-        for j in range(7):
-            if type(board[i][j]) == str and board[i][j] == board[i+1][j] and board[i+1][j] == board[i+2][j] and board[i+2][j] == board[i+3][j]:
+    for row in range(3):
+        for column in range(7):
+            if type(board[row][column]) == str \
+            and board[row][column] == board[row+1][column] \
+            and board[row+1][column] == board[row+2][column] \
+            and board[row+2][column] == board[row+3][column]:
                 return True
 
     l = []
@@ -44,10 +51,10 @@ def win(board):
 
     return False
 
-def which_gamer(gamer):
+def gamer_info_string(gamer):
     if gamer == "@":
-        return "gracz nr. 1"
-    return "gracz nr. 2"
+        return "gracz nr. 1 (@)"
+    return "gracz nr. 2 (#)"
 
 board = [
     [1, 2, 3, 4, 5, 6, 7],
@@ -71,13 +78,13 @@ print(instruction)
 
 print_board(board)
 
-for round in range(1, 43):
-    if round % 2 !=0:
+for round_ in range(1, 43):
+    if round_ % 2 !=0:
         gamer = "@"
-        print('Gracz nr. 1 (@)')
     else:
         gamer = "#"
-        print('Gracz nr. 2 (#)')
+
+    print(gamer_info_string(gamer).capitalize())
 
     try:
         position = int(input("Podaj numer kolumny, do której chcesz wrzucić żeton: "))
@@ -94,8 +101,8 @@ for round in range(1, 43):
 
     print_board(board)
 
-    if round > 6 and win(board):
-        print("Koniec gry. Wygrywa", which_gamer(gamer)+". Gratulacje!" )
+    if round_ > 6 and win(board):
+        print("Koniec gry. Wygrywa", gamer_info_string(gamer)+". Gratulacje!" )
         exit()
 
 print("Koniec gry. Remis!")
